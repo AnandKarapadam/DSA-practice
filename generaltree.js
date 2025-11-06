@@ -20,7 +20,6 @@ class GeneralTree{
         parent.children.push(child);    
         return child;
     }
-
     dfs(node){
         if(!node)return;
         console.log(node.value);
