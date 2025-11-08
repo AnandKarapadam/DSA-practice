@@ -1,48 +1,81 @@
-class MinHeap{
+class TrieNode{
     constructor(){
-        this.heap = [];
-    }
-
-    build(arr){
-        this.heap = arr;
-        for(let i=Math.floor(this.heap.length/2)-1;i>=0;i--){
-            this.heapifyDown(i);
-        }
-    }
-    insert(value){
-        this.heap.push(value);
-        this.heapifyUp(this.heap.length-1);
-    }
-    heapifyUp(index){
-        let parent = Math.floor((index-1)/2);
-        while(index>0&&this.heap[index]<this.heap[parent]){
-            [this.heap[index],this.heap[parent]] = [this.heap[parent],this.heap[index]];
-
-            index = parent;
-            parent = Math.floor((index-1)/2);
-        }
-    }
-    remove(){
-        if(this.heap.length===0)return null;
-        if(this.heap.length===1)return this.heap.pop();
-
-        let root = this.heap[0];
-        this.heap[0] = this.heap.pop();
-        this.heapifyDown(0);
-        return root;
-    }
-    heapifyDown(index){
-        let smallest = index;
-        let left = 2*index+1;
-        let right = 2*index+2;
-
-        if(left<this.heap.length&&this.heap[left]<this.heap[smallest])smallest = left;
-        if(right<this.heap.length&&this.heap[right]<this.heap[smallest])smallest = right;
-
-        if(smallest!==index){
-            [this.heap[index],this.heap[smallest]] = [this.heap[smallest],this.heap[index]];
-            this.heapifyDown(smallest);
-        }
+        this.child = {};
+        this.isEnd = false;
+        this.count = 0;
     }
 }
+class Trie{
+    constructor(){
+        this.root = new TrieNode();
+    }
+    insert(word){
+        let node = this.root;
+        for(let ch of word){
+            if(!node.child[ch]){
+                node.child[ch] = new TrieNode();
+            }
+            node = node.child[ch];
+            node.count++
+        }
+        node.isEnd = true;
+    }
+    search(word){
+        let node = this.root;
+        for(let ch of word){
+            if(!node.child[ch])return false;
+            node = node.child[ch];
+        }
+        return node.isEnd;
+    }
+    searchPrefix(prefix){
+        let node = this.root;
+        for(let ch of prefix){
+            if(!node.child[ch])return false;
+            node = node.child[ch];
+        }
 
+        return true;
+    }
+
+    autoComplete(prefix){
+        let node = this.root;
+
+        for(let ch of prefix){
+            if(!node.child[ch])return [];
+            node = node.child[ch];
+        }
+        let result = [];
+        function dfs(node,path){
+            if(node.isEnd)result.push(prefix+path);
+            for(let ch in node.child){
+                dfs(node.child[ch],path+ch);
+            }
+        }
+
+        dfs(node,"");
+        return result ;
+    }
+    listAll(){
+        let node = this.root;
+        let result = [];
+
+        function dfs(node,path){
+            if(node.isEnd)result.push(path);
+            for(let ch in node.child){
+                dfs(node.child[ch],path+ch);
+            }
+        }
+
+        dfs(node,"");
+        return result;
+    }
+    countPre(prefix){
+        let node = this.root;
+        for(let ch of prefix){
+            if(!node.child[ch])return 0;
+            node = node.child[ch];
+        }
+        return node.count;
+    }
+}

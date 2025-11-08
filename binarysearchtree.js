@@ -101,9 +101,6 @@ class BST{
         }
         return current;
     }
-
-
-
     display(){
         console.log(JSON.stringify(this.root,null,2));
     }
