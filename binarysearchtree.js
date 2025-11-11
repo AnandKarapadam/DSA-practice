@@ -75,6 +75,17 @@ class BST{
 
         return 1+Math.max(this.height(node.left),this.height(node.right));
     }
+    countLeaves(node){
+        if(!node)return 0;
+        if(!node.right&&!node.left)return 1;
+        return this.countLeaves(node.left)+this.countLeaves(node.right);
+    }
+    countNodes(node){
+        if(!node){
+            return 0;
+        }
+        return 1+this.countNodes(node.left)+this.countNodes(node.right);
+    }
     delete(value){
         this.root = this.deleteRec(this.root,value);
     }
@@ -106,9 +117,9 @@ class BST{
     }
 
     findClosestValue(value){
-        return this.findClosest(this.root,value);
+        return this.findClosest(this.root,value,this.root.value);
     }
-    findClosest(node,target,closest = Infinity){
+    findClosest(node,target,closest){
         if(!node)return closest;
 
         if(Math.abs(target-node.value)<Math.abs(target-closest)){
@@ -129,6 +140,16 @@ class BST{
         if(node.value<=min||node.value>=max)return false;
 
         return (this.isBST(node.left,min,node.value)&&this.isBST(node.right,node.value,max));
+    }
+    depth(node,value,level = 0){
+        if(!node)return -1;
+
+        if(node.value===value)return level;
+        if(value<node.value){
+            return this.depth(node.left,value,level+1);
+        }else{
+           return this.depth(node.right,value,level+1);
+        }
     }
 }
 

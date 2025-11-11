@@ -56,6 +56,16 @@
 //     }
 //     return sorted;
 // }
+//function kthLargest(arr,k){
+    // let heap = new MinHeap();
+    // for(let num of arr){
+    //     heap.insert(num);
+    //     if(k<heap.heap.length){
+    //         heap.remove();
+    //     }
+    // }
+    // return heap.heap[0];
+//}
 // let min = new MinHeap()
 // let arr = [3,5,6,7,2,3,4];
 // heapSort(arr);
@@ -126,7 +136,14 @@
 //     }
 //     return sorted;
 // }
-
+// function kthLargset(arr,k){
+//     let heap = new MaxTree();
+//     heap.build(arr);
+//     for(let i=1;i<k;i++){
+//         heap.remove();
+//     }
+//     return heap.heap[0];
+// }
 // let arr = [2,3,4,5,6,7];
 // console.log(heapSort(arr));
 

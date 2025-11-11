@@ -25,6 +25,33 @@ class BinaryTree{
         parent.right = new Node(value);
     }
 
+    //instead of three nodes we can use one method
+    insert(value){
+        let newNode = new Node(value);
+        if(!this.root){
+            this.root = newNode;
+            return;
+        }
+        const queue = [this.queue];
+        while(queue.length>0){
+            const current = queue.shift();
+
+            if(!current.left){
+                current.left = newNode;
+                break;
+            }else{
+                queue.push(current.left);
+            }
+
+            if(!current.right){
+                current.right = newNode;
+                break;
+            }else{
+                queue.push(current.right);
+            }
+
+        }
+    }
     preOrder(node){
         if(node===null)return;
         console.log(node.value);
@@ -73,6 +100,21 @@ class BinaryTree{
 
         return 1 + Math.max(leftH,rightH);
     }
+    minDepth(node){
+        if(!node)return 0;
+        if(!node.left)return 1+this.minDepth(node.right);
+        if(!node.right)return 1+this.minDepth(node.left);
+
+        return 1+Math.min(this.minDepth(node.left),this.minDepth(node.right));
+    }
+    minValue(node){
+        if(!node)return Infinity;
+        return Math.min(node.value,this.minValue(node.left),this.minValue(node.right));
+    }
+    maxValue(node){
+        if(!node)return -Infinity;
+        return Math.max(node.value,this.maxValue(node.left),this.maxValue(node.right));
+    }
     display(){
         console.log(JSON.stringify(this.root,null,2));
     }
@@ -98,12 +140,10 @@ class BinaryTree{
 
     delete(value){
         if(!this.root)return null;
-        
         if(this.root.value === value && !this.root.left && !this.root.right){
             this.root  = null;
             return ;
         }
-        
         let queue  = [this.root];
         let nodeToDelete = null;
         let lastNode = null;
@@ -136,6 +176,19 @@ class BinaryTree{
 
     }
 
+    findClosestUpper(target){
+        let node = this.root;
+        let upper = null;
+        while(node){
+            if(target<=node.value){
+                upper = node.value;
+                node = node.left;
+            }else{
+                node = node.right;
+            }
+        }
+        return upper;
+    }
 }
 
 
