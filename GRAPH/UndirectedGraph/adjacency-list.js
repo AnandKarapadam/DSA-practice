@@ -1,3 +1,4 @@
+//Undirected Graph - Adjacency-List.
 class Graph{
     constructor(){
         this.adjacencyList = {};
@@ -39,16 +40,12 @@ class Graph{
         delete this.adjacencyList[vertex];
     }
 }
-
-
 const graph = new Graph();
 graph.addVertices("A");
 graph.addVertices("B");
 graph.addVertices("C");
 graph.addEdges("A","B");
 graph.addEdges("B","C");
-graph.removeEdge("A","B");
-// graph.removeVertex("B");
 graph.display();
 console.log(graph.haveEdge("A","B"));
 console.log(graph.haveEdge("A","C"));

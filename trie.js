@@ -80,6 +80,15 @@ class Trie{
     
 }   
 
+function replaceWords(dictonary,sentence){
+    const trie = new TrieNode();
+    for(const word of dictonary){
+        trie.insert(word);
+    }
+
+    return sentence.split(" ").map(word=>trie.searchPrefix(word)||word).join(" ");
+}
+
 let t = new Trie();
 t.insert("cat");
 t.insert("cap");

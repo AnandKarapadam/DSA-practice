@@ -1,3 +1,4 @@
+//Directional Graph Adjacency List.
 class Graph{
     constructor(){
         this.adjacencyList = {};
@@ -21,7 +22,6 @@ class Graph{
     removeVertex(vertex){
         if(!this.adjacencyList[vertex])return;
         delete this.adjacencyList[vertex];
-
         for(let vert in this.adjacencyList){
             this.adjacencyList[vert]?.delete(vertex);
         }
@@ -32,3 +32,11 @@ class Graph{
         }
     }
 }
+let g = new Graph();
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addEdge("A","B");
+g.addEdge("B","C");
+console.log(g.hasEdge('A',"B"))
+g.display();
