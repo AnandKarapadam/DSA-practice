@@ -13,6 +13,15 @@ class Graph{
     hasEdge(v1,v2){
         return this.matrix[v1][v2]===1;
     }
+    remove(vertex){//is optional because adjacency-matrix graphs usually don’t remove vertices
+        if(vertex<0||vertex>=this.vertices)return;
+        
+        this.matrix.splice(vertex,1);
+        for(let row of this.matrix){
+            row.splice(vertex,1);
+        }
+        this.vertices--;
+    }
     display(){
         for(let row of this.matrix){
             console.log(row.join(" "));

@@ -25,7 +25,6 @@ class BST{
 
         return node;
     }
-
     preOrder(node){
         if(!node){
             return ;
@@ -103,6 +102,7 @@ class BST{
 
        }
        return node;
+       
     }
     minValue(node){
         let current = node;
@@ -151,6 +151,28 @@ class BST{
            return this.depth(node.right,value,level+1);
         }
     }
+    secondLargest(node = this.root){
+        if(!node||(!node.left&&!node.right))return null;
+
+        let current = node;
+        let parent = null;
+
+        while(current.right){
+            parent = current;
+            current = current.right;
+        }
+
+        if(current.left){
+            let temp = current.left;
+            if(temp.right){
+                temp = temp.right;
+            }
+            return temp.value;
+        }
+
+        return parent.value;
+        
+    }
 }
 
 
@@ -162,4 +184,5 @@ bst.insert(30);
 bst.insert(60);
 bst.insert(90);
 bst.display()
+console.log(bst.secondLargest());
 

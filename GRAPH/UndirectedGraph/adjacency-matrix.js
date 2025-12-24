@@ -3,15 +3,12 @@ class Graph{
         this.vertices = [];
         this.adjacentMatrix = [];
     }
-
     addVertice(vertex){
         if(this.vertices.includes(vertex))return;
         this.vertices.push(vertex);
-
         for(let row of this.adjacentMatrix){
             row.push(0);
         }
-
         let newRow = new Array(this.vertices.length).fill(0);
         this.adjacentMatrix.push(newRow);
     }

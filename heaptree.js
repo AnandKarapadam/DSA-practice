@@ -56,6 +56,15 @@
 //     }
 //     return sorted;
 // }
+// let min = new MinHeap()
+// let arr = [3,5,6,7,2,3,4];
+// console.log(heapSort(arr));
+// min.insert(10);
+// min.insert(20);
+// min.insert(4);
+// min.insert(3);
+// min.insert(5);
+// min.display();
 //function kthLargest(arr,k){
     // let heap = new MinHeap();
     // for(let num of arr){
@@ -66,25 +75,15 @@
     // }
     // return heap.heap[0];
 //}
-// let min = new MinHeap()
-// let arr = [3,5,6,7,2,3,4];
-// heapSort(arr);
-// min.insert(10);
-// min.insert(20);
-// min.insert(4);
-// min.insert(3);
-// min.insert(5);
-// min.display();
 
 
 //Max-tree//
-
 // class MaxTree{
 //     constructor(){
 //         this.heap = [];
 //     }
 //     build(arr){
-//         this.heap = arr;
+//         this.heap = arr.slice();
 //         for(let i=Math.floor(this.heap.length/2)-1;i>=0;i--){
 //             this.heapifyDown(i);
 //         }
@@ -124,9 +123,7 @@
 //             this.heapifyDown(largest);
 //         }
 //     }
-
 // }
-
 // function heapSort(arr){
 //     let heap = new MaxTree();
 //     heap.build(arr);
@@ -146,39 +143,42 @@
 // }
 // let arr = [2,3,4,5,6,7];
 // console.log(heapSort(arr));
+// console.log(kthLargset(arr,2));
+
+
 
 
 //Heap sort
-function heapSort(arr){
-    let n = arr.length;
+// function heapSort(arr){
+//     let n = arr.length;
 
-    for(let i=Math.floor(n/2)-1;i>=0;i--){
-        heapify(arr,n,i);
-    }
-    for(let i=n-1;i>0;i--){
-        [arr[0],arr[i]] = [arr[i],arr[0]];
-        heapify(arr,i,0);
-    }
-    return arr;
-}
-function heapify(arr,n,i){
-    let largest = i;
-    let left = 2*i+1;
-    let right = 2*i+2;
+//     for(let i=Math.floor(n/2)-1;i>=0;i--){
+//         heapify(arr,n,i);
+//     }
+//     for(let i=n-1;i>0;i--){
+//         [arr[0],arr[i]] = [arr[i],arr[0]];
+//         heapify(arr,i,0);
+//     }
+//     return arr;
+// }
+// function heapify(arr,n,i){
+//     let largest = i;
+//     let left = 2*i+1;
+//     let right = 2*i+2;
 
-    if(left<n&&arr[left]>arr[largest])largest = left;
-    if(right<n&&arr[right]>arr[largest])largest = right;
-    if(largest!==i){
-        [arr[largest],arr[i]] = [arr[i],arr[largest]];
-        heapify(arr,n,largest);
-    }
-}
+//     if(left<n&&arr[left]>arr[largest])largest = left;
+//     if(right<n&&arr[right]>arr[largest])largest = right;
+//     if(largest!==i){
+//         [arr[largest],arr[i]] = [arr[i],arr[largest]];
+//         heapify(arr,n,largest);
+//     }
+// }
 
-let arr = [2,6,7,8,9,1,2,3];
-console.log(heapSort(arr));
+// let arr = [2,6,7,8,9,1,2,3];
+// console.log(heapSort(arr));
 
 
-//Find k th largest element//
+// // Find k th largest element//
 // function kthlargest(arr,k){
 //     let n = arr.length;
 //     for(let i=Math.floor(n/2)-1;i>=0;i--){

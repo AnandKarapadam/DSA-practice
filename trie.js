@@ -77,17 +77,27 @@ class Trie{
         dfs(node,"");
         return result;
     }
+    searchPrefix(word){
+        let node = this.root;
+        let prefix = "";
+        for(let ch of word.toLowerCase()){
+            if(!node.children[ch])return null;
+            prefix+=ch;
+            node = node.children[ch];
+            if(node.isEndOfWord)return prefix;
+        }
+        return null;
+    }
     
 }   
 
-function replaceWords(dictonary,sentence){
-    const trie = new TrieNode();
-    for(const word of dictonary){
-        trie.insert(word);
+    function replaceWords(dictonary,sentence){
+        const trie = new TrieNode();
+        for(const word of dictonary){
+            trie.insert(word);
+        }
+        return sentence.split(" ").map(word=>trie.searchPrefix(word)||word).join(" ");
     }
-
-    return sentence.split(" ").map(word=>trie.searchPrefix(word)||word).join(" ");
-}
 
 let t = new Trie();
 t.insert("cat");

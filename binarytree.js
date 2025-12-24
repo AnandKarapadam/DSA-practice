@@ -32,7 +32,7 @@ class BinaryTree{
             this.root = newNode;
             return;
         }
-        const queue = [this.queue];
+        const queue = [this.root];
         while(queue.length>0){
             const current = queue.shift();
 
@@ -155,12 +155,14 @@ class BinaryTree{
             if(current.value===value)nodeToDelete = current;
 
             if(current.left){
-                parentOfLast = current;
+                
                 queue.push(current.left);
+                parentOfLast = current;
             }
             if(current.right){
-                parentOfLast = current;
+                
                 queue.push(current.right);
+                parentOfLast = current;
             }
             lastNode = current;
         }
@@ -227,3 +229,8 @@ console.log(tree.depth(tree.root,"D"));
 
 
 
+    //     A
+    //    / \
+    //   B   C
+    //  / \   \
+    // D   E   F

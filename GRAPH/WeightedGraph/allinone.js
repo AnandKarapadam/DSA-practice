@@ -13,7 +13,6 @@ class Graph{
     addEdge(v1,v2,weight =1){
         this.addVertex(v1);
         this.addVertex(v2);
-
         if(this.isWeighted){
             this.adjacencyList[v1].push({node:v2,weight});//{ node: "B", weight: 4 }
             if(!this.isDirected){

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vintage Noisy Background</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    /* Base vintage color */
+    background-color: #c4b59b;
+    /* Noise overlay using repeating gradients */
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.02) 0px,
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px,
+        transparent 4px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+    background-size: cover;
+    background-blend-mode: overlay;
+    animation: grain 0.5s steps(10) infinite;
+  }
+
+  /* Optional animated subtle grain */
+  @keyframes grain {
+    0% { background-position: 0 0, 0 0; }
+    25% { background-position: 10px 10px, -10px -10px; }
+    50% { background-position: -10px -10px, 10px 10px; }
+    75% { background-position: 5px -5px, -5px 5px; }
+    100% { background-position: 0 0, 0 0; }
+  }
+
+  /* Example content */
+  h1 {
+    text-align: center;
+    margin-top: 40vh;
+    color: #4a3f2f;
+    font-family: "Georgia", serif;
+    font-size: 3em;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+  <h1>Vintage Noise Background</h1>
+</body>
+</html>
