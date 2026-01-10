@@ -39,6 +39,22 @@ class Graph{
         }
         delete this.adjacencyList[vertex];
     }
+    findCycle(start){
+        let visited = new Set();
+
+        let dfs = (node,parent = null)=>{
+            visited.add(node);
+            for(let neigh in this.adjacencyList[node]){
+                if(!visited.has(neigh)){
+                    if(dfs(neigh,node))return true;
+                }else if(neigh!==parent){
+                    return true;
+                }
+            }
+            return false;
+        }
+        return dfs(start);
+    }
 }
 const graph = new Graph();
 graph.addVertices("A");

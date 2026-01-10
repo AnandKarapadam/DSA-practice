@@ -486,3 +486,39 @@ console.log(shift("abc",2));
 //C - Consistancy - The database must move from one valid state to another valid state.if rules break transaction fails.eg:Balance cannot go below 0,Age cannot be negative.
 //I - Isolation - Multiple transactions running at the same time must not affect each other.
 //D - Durability - Once a transaction is committed, the data will not be lost.
+
+
+//Object - flatten object //
+const users = {
+  name: "Anand",
+  address: {
+    city: "Wayanad",
+    state: "Kerala",
+    pin: {
+      area: "Kalpetta",
+      code: 673121
+    }
+  },
+  skills: {
+    backend: "Node.js",
+    database: "MongoDB"
+  }
+};
+
+function flattenObject(obj, parentKey = "", result = {}) {
+  for (let key in obj) {
+    const newKey = parentKey ? `${parentKey}.${key}` : key;
+
+    if (
+      typeof obj[key] === "object" &&
+      obj[key] !== null &&
+      !Array.isArray(obj[key])
+    ) {
+      flattenObject(obj[key], newKey, result);
+    } else {
+      result[newKey] = obj[key];
+    }
+  }
+  return result;
+}
+

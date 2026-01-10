@@ -62,13 +62,46 @@ class Graph{
 
             for(let neighbor of this.adjacencyList[node]){
                 if(!visited.has(neighbor)){
-                    visited.add(neighbor);
                     traversal(neighbor);
                 }
             }
 
         }
         traversal(start);
+    }
+    findCycle(start){
+        let visited = new Set();
+        let reStack = new Set();
+
+        let dfs = (node)=>{
+            if(reStack.has(node))return true;
+            if(visited.has(node))return false;
+
+            visited.add(node);
+            reStack.add(node);
+
+            for(let neigh of this.adjacencyList[node]){
+                if(dfs(neigh))return true;
+            }
+            reStack.delete(node);
+            return false;
+        }
+        return dfs(start)
+    }
+    isConnected(){
+        let visited = new Set();
+        let vertices = Object.keys(this.adjacencyList);
+        
+        let dfs = (node)=>{
+            visited.add(node);
+            for(let neigh of this.adjacencyList[node]){
+                if(!visited.has(neigh)){
+                    dfs(neigh);
+                }
+            }
+        }
+        dfs(vertices[0]);
+        return vertices.length===visited.size;
     }
     shortestPath(start,end){
         let queue = [start];
@@ -107,3 +140,4 @@ g.display();
 g.bfs("A");
 g.dfs("A");
 console.log(g.shortestPath("A","C"));
+console.log(g.findCycle("A"));

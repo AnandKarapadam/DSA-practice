@@ -78,4 +78,10 @@ let ob2 = new Person('anand',25);
 //+//   
 console.log(1 + 2 + "3")//"33"
 console.log("1" + 2 + 3)// "123"
+console.log("abc".indexOf("abc"))//0
+console.log("abc".indexOf("abcd"))//-1
+
+//DOUBLE BANG//
+console.log(!!'hello')//true;this will convert to boolean
+console.log(!!0)//false;
 

@@ -56,7 +56,44 @@ class Graph{
             console.log(this.vertices[i]+"  "+this.adjacentMatrix[i].join(" "));
         }
     }
+    bfs(start){
+        let queue = [];
+        let visited = new Set();
+        let i = this.vertices.indexOf(start);
+        if(i===-1)return;
 
+        queue.push(i);
+        visited.add(i);
+
+        while(queue.length>0){
+            let curr = queue.shift();
+            console.log(this.vertices[curr]);
+
+            for(let j=0;j<this.adjacentMatrix[curr].length;j++){
+                if(this.adjacentMatrix[curr][j]===1&&!visited.has(j)){
+                    visited.add(j);
+                    queue.push(j);
+                }
+            }
+        }
+    }
+    dfs(start){
+        let visited = new Set();
+        let i = this.vertices.indexOf(start);
+        if(i===-1)return false;
+
+        let traversal = (curr)=>{
+            visited.add(curr);
+            console.log(this.vertices[curr]);
+            
+            for(let j=0;j<this.adjacentMatrix[curr].length;j++){
+                if(this.adjacentMatrix[curr][j]===1&&!visited.has(j)){
+                    traversal(j);
+                }
+            }
+        }
+        traversal(i);
+    }
 }
 
 let g = new Graph();
@@ -67,7 +104,7 @@ g.addEdges("A","B");
 g.addEdges("B","C");
 g.display();
 // g.removeEdge("A","B");
-g.removeVertex("A");    x
+g.removeVertex("A");    
 
 g.display();
 

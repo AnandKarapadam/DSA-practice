@@ -49,7 +49,7 @@ function sum(arr,i=0){
     if(i===arr.length)return 0;
     return arr[i]+sum(arr,i+1);
 }
-// console.log(sum([1,2,3])).
+// console.log(sum([1,2,3]))
 
 function sumofn(n,sum=0){
     if(n===0)return sum;
@@ -84,3 +84,9 @@ function upToN(n){
     console.log(n);
 } 
 upToN(5);
+
+    function reverseStr(str,index = 0){
+        if(index===str.length)return "";
+        return reverseStr(str,index+1)+str[index];
+    }
+    console.log(reverseStr("hello"));

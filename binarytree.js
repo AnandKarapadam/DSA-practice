@@ -100,6 +100,14 @@ class BinaryTree{
 
         return 1 + Math.max(leftH,rightH);
     }
+    isBalanced(node){
+        if(!node)return true;
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+        if(Math.abs(leftHeight-rightHeight)>1)return false;
+
+        return this.isBalanced(node.left)&&this.isBalanced(node.right);
+    }
     minDepth(node){
         if(!node)return 0;
         if(!node.left)return 1+this.minDepth(node.right);
@@ -137,7 +145,32 @@ class BinaryTree{
 
         return this.depth(node.right,value,level+1);
     }
-
+    
+    collectCounts(){
+        let queue = [this.root];
+        let counts = {};
+        while(queue.length>0){
+            let current = queue.shift();
+            counts[current.value] = (counts[current.value]||0)+1;
+            if(current.left){
+                queue.push(current.left);
+            }
+            if(current.right){
+                queue.push(current.right);
+            }
+        }
+        return counts;
+    }
+    deleteDuplicates(){
+        let counts = this.collectCounts();
+        for(let value in counts){
+            if(counts[value]>1){
+                for(let i=0;i<counts[value];i++){
+                this.delete(Number(value));
+            }
+            }
+        }
+    }
     delete(value){
         if(!this.root)return null;
         if(this.root.value === value && !this.root.left && !this.root.right){
@@ -190,6 +223,68 @@ class BinaryTree{
             }
         }
         return upper;
+    }
+    kthSmallest(k){
+        let queue = [this.root];
+        let result = [];
+
+        while(queue.length>0){
+            let current = queue.shift();
+            result.push(current.value);
+            if(current.left)queue.push(current.left);
+            if(current.right)queue.push(current.right);
+        }
+        result.sort((a,b)=>a.localeCompare(b))//if it is string
+        //result.sort((a,b)=>a-b);
+        return result[k-1];
+    }
+    invertTree(node=this.root){
+        if(!node)return null;
+        [node.left,node.right] = [node.right,node.left];
+
+        this.invertTree(node.left);
+        this.invertTree(node.right);
+        return node;
+    }
+    isFullBinaryTree(node=this.root){
+        if(!node)return true;
+        if(!node.left&&!node.right)return true;
+
+        if(node.left&&node.right){
+            return this.isFullBinaryTree(node.left)&&this.isFullBinaryTree(node.right);
+        }
+        return false;
+    }
+    isCompleteTree(){
+        if(!node)return true;
+        let queue = [this.root];
+        let seenNull = false;
+
+        while(queue.length>0){
+            let node = queue.shift();
+
+            if(node===null){
+                seenNull = true;
+            }else{
+                if(seenNull)return false;
+                queue.push(current.left);
+                queue.push(current.right);
+            }
+        }
+        return true;   
+    }
+    isPerfectBT(){
+        let h = this.height(this.root);
+        let count = this.countNodes(this.root);
+        return count===Math.pow(2,h)-1;
+    }
+    isSkewed(node){
+        if(!node)return true;
+        if(node.right&&node.left)return false;
+
+        if(node.left)return this.isSkewed(node.left);
+        if(node.right)return this.isSkewed(node.right);
+        return true;
     }
 }
 
