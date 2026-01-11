@@ -173,6 +173,11 @@ class BST{
         return parent.value;
         
     }
+    longestPathSum(node=this.root){
+        if(!node)return 0;
+
+        return node.value+Math.max(this.longestPathSum(node.left),this.longestPathSum(node.right));
+    }
 }
 
 
