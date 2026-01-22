@@ -1,5 +1,5 @@
 //Constructor Function//
-function Person(name,age){
+function Person(name,age){//avoid duplication//
     this.name = name;
     this.age = age;
 
@@ -10,7 +10,7 @@ function Person(name,age){
 let p = new Person("Anand",25);
 p.greet()
 //Factory Function(no new keyword)//
-function personOne(place,distrit){
+function personOne(place,distrit){//closure//
     return {
         place:place,
         distrit:distrit,
@@ -34,7 +34,7 @@ console.log(gen.next());
 
 //Call, apply , bind//
 
-let obj1={
+let obj1={  
     name:"Big daddy"
 }
 let obj2={
@@ -207,9 +207,9 @@ const { Router } = require("express");
     }
   }
   persoN.greet();
-  console.log(Object.keys(persoN));//return array of keys//
-  console.log(Object.entries(persoN));
-  console.log(Object.values(persoN));
+  console.log(Object.keys(persoN));//return array of keys[keys]//
+  console.log(Object.entries(persoN));//[[key,value],[key,value],...]//
+  console.log(Object.values(persoN));//[values]
 
   //Array of objects//
 
@@ -521,4 +521,18 @@ function flattenObject(obj, parentKey = "", result = {}) {
   }
   return result;
 }
+function isBalanced(str) {
+    let stack = [];
+    let map = { ')': '(', ']': '[', '}': '{' };
+
+    for (let ch of str) {
+        if (ch === '(' || ch === '[' || ch === '{') {
+            stack.push(ch);
+        } else {
+            if (stack.pop() !== map[ch]) return false;
+        }
+    }
+    return stack.length === 0;
+}
+
 
