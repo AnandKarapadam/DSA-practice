@@ -519,7 +519,7 @@ function flattenObject(obj, parentKey = "", result = {}) {
       result[newKey] = obj[key];
     }
   }
-  return result;
+  return result;        
 }
 function isBalanced(str) {
     let stack = [];
@@ -533,6 +533,36 @@ function isBalanced(str) {
         }
     }
     return stack.length === 0;
+}
+let array = [2,4,5,7,8,9];
+function binarySearch(arr,target){
+    let left = 0;
+    let right = arr.length-1;
+    while(left<=right){
+        let mid = Math.floor((left+right)/2);
+        if(arr[mid]===target)return mid;
+
+        if(target<arr[mid]){
+            right = mid-1;
+        }else{
+            left = mid+1;
+        }
+    }
+}
+console.log(binarySearch(arr,4));
+
+function binarySearchRecursive(arr,target,left = 0,right=arr.length-1){
+    if(left>right) return -1;
+
+    let mid = Math.floor((left+right)/2);
+    if(arr[mid]===target)return mid;
+
+    if(target<arr[mid]){
+        return binarySearchRecursive(arr,target,left,right = mid-1);
+    }else{
+        return binarySearchRecursive(arr,target,left=mid+1,right);  
+    }
+
 }
 
 

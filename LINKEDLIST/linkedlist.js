@@ -4,7 +4,7 @@ class Node{
         this.next = null;
     }
 }
-class linkedList{//used for brower backtracking, undo/redo operations,operating systems,cpu scheduling
+class linkedList{//us   ed for brower backtracking, undo/redo operations,operating systems,cpu scheduling
     constructor(){
         this.head = null;
     }

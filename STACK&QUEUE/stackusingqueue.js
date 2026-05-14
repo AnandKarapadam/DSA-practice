@@ -4,7 +4,7 @@ class Stack{
     }
     push(value){
         this.q.push(value);
-        for(let i=0;i<this.q.length;i++){
+        for(let i=0;i<this.q.length-1;i++){
             this.q.push(this.q.shift());
         }
     }

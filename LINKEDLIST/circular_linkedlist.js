@@ -4,7 +4,7 @@ class Node{
         this.next = null;
     }
 }
-class CLL{
+class CLL{//cpu scheduling/music playlist
     constructor(){
         this.head = null;
     }

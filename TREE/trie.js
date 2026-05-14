@@ -19,7 +19,7 @@ class Trie{
             node = node.children[char];
             node.count++;
        }
-       node.isEndOfWord = true;
+       node.isEndOfWord = true; 
     }
     search(word){
         let node = this.root;

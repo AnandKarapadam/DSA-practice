@@ -115,6 +115,11 @@ class BinaryTree{
 
         return 1+Math.min(this.minDepth(node.left),this.minDepth(node.right));
     }
+    getBalance(node){
+        if(node === null) return 0;
+
+        return this.height(node.left) - this.height(node.right);
+        }
     minValue(node){
         if(!node)return Infinity;
         return Math.min(node.value,this.minValue(node.left),this.minValue(node.right));
@@ -122,7 +127,7 @@ class BinaryTree{
     maxValue(node){
         if(!node)return -Infinity;
         return Math.max(node.value,this.maxValue(node.left),this.maxValue(node.right));
-    }
+    }   
     display(){
         console.log(JSON.stringify(this.root,null,2));
     }
@@ -236,7 +241,7 @@ class BinaryTree{
         }
         result.sort((a,b)=>a.localeCompare(b))//if it is string
         //result.sort((a,b)=>a-b);
-        return result[k-1];
+        return result[k-1]; 
     }
     invertTree(node=this.root){
         if(!node)return null;
@@ -259,7 +264,7 @@ class BinaryTree{
         if(!node)return true;
         let queue = [this.root];
         let seenNull = false;
-
+        
         while(queue.length>0){
             let node = queue.shift();
 
@@ -285,6 +290,17 @@ class BinaryTree{
         if(node.left)return this.isSkewed(node.left);
         if(node.right)return this.isSkewed(node.right);
         return true;
+    }
+    shortestPathNodeSum(node=this.root){
+        if(!node)return Infinity;
+        if(!node.left&&!node.right){
+            return node.value;
+        }
+        return node.value+Math.min(this.shortestPathNodeSum(node.left),this.shortestPathNodeSum(node.right));
+    }
+    longsestPathSum(node=this.root){
+        if(!node)return 0;
+        return node.value+Math.max(this.longsestPathSum(node.left),this.longsestPathSum(node.right));
     }
 }
 

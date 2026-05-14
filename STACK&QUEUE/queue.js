@@ -1,4 +1,4 @@
-class Queue{
+class Queue{//task scheduling / api request handling    
     constructor(){
         this.q = [];
     }

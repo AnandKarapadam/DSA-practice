@@ -5,7 +5,6 @@ class Node{
         this.right = null;
     }
 }
-
 class BST{
     constructor(){
         this.root = null;
@@ -177,6 +176,13 @@ class BST{
         if(!node)return 0;
 
         return node.value+Math.max(this.longestPathSum(node.left),this.longestPathSum(node.right));
+    }
+    shortestPathSum(node=this.root){
+        if(!node)return Infinity;
+        if(!node.left&&!node.right){
+            return node.value;
+        }
+        return node.value+Math.min(this.shortestPathSum(node.left),this.shortestPathSum(node.right));
     }
 }
 

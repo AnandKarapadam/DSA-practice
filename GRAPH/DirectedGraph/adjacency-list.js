@@ -18,7 +18,7 @@ class Graph{
     }
     removeEdge(v1,v2){
         this.adjacencyList[v1]?.delete(v2);
-    }
+    }   
     removeVertex(vertex){
         if(!this.adjacencyList[vertex])return;
         delete this.adjacencyList[vertex];
@@ -127,6 +127,14 @@ class Graph{
         }
         path.reverse();
         return path;
+    }
+    isDirected(){
+        for(let vertex in this.adjacencyList){
+            for(let neigh of this.adjacencyList[vertex]){
+                if(!this.adjacencyList[neigh]?.has(vertex)){return true}
+            }
+        }
+        return false;
     }
 }
 let g = new Graph();
