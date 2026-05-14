@@ -79,6 +79,18 @@ display();
     }
     console.log("currying"+sum(1)(2)(3));
 
+    //Currying infinite arguments//
+    const sum = (a)=>{
+    return function inner(b){
+        if(b===undefined)return a;
+        
+        a*=b;
+        return inner;
+     }
+    }
+
+    console.log(sum(10)(20)(20)())
+
     //Nullish Coelescing//
     let name = null;
     let userName = name??"Anand";
